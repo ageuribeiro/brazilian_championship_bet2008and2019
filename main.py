@@ -24,6 +24,46 @@ data = pd.read_csv('dados.csv')
 #visualizar os dados
 display(data.head())
 
+#para modificar as colunas
+# data.rename(columns={'Country':'País','League':'Liga','Season':'Temporada','Date':'Data','Time':'Horário','Home':'Casa','Away':'Fora','HG':'Gols Mandante','})
+
+# contabilizar a quantidade de resultados de vitorias, derrotas e empates
+data['Res'].value_counts()
+
+#descrição estatistica do dataframe
+data.describe()
+
+#excluir todas as linhas que contenha algum dado faltante
+data2 = data.dropna()
+data2.head()
+
+#verificar o tamanho do dataset
+data2.shape
+
+#verificar o tamanho do dataset original
+data.shape
+
+#identifica se existe dados faltantes escrevendo "TRUE" na célula.
+enull = data.isnull()
+enull.head(100)
+
+#verifica por coluna quantos dados faltantes existem
+dados_faltantes = data.isnull().sum()
+print(dados_faltantes)
+
+#mostrar dados faltantes em porcentagem
+faltante_percentual = (data.isnull().sum()/len(data['Country']))*100
+print(faltante_percentual)
+
+#Alterando as células com dados faltantes.
+data['HG'].fillna(0, inplace=True)
+data['AG'].fillna(0, inplace=True)
+data['Res'].fillna(0, inplace=True)
+data['PH'].fillna(0, inplace=True)
+data['PA'].fillna(0, inplace=True)
+data.head(100)
+data.isnull().sum()
+
 #explorando os dados
 #Base de dados dos campeonatos de 2012 a 2017
 matches = data.shape[0]
